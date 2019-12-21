@@ -1,0 +1,11 @@
+#which version of docker compose syntax
+version: '3'
+
+services:
+    web:
+      build: . # build from current directory
+      command: python src/leadmanager/manage.py runserver 0.0.0.0:8000 # start server
+      volumes:
+        - .:/code 
+      ports:
+        - "8000:8000"
