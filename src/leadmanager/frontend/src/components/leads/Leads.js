@@ -4,8 +4,12 @@ import PropTypes from 'prop-types'
 import { getLeads, deleteLeads } from '../../actions/leads'
 
 export class Leads extends Component {
+    // Still works w/o proptypes
+    // just good practice
     static propTypes = {
         leadsProp: PropTypes.array.isRequired,
+        getLeads: PropTypes.func.isRequired,
+        deleteLeads: PropTypes.func.isRequired,
     }
 
     componentDidMount() {
