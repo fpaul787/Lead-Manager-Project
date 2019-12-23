@@ -12,6 +12,29 @@ export class Leads extends Component {
         this.props.getLeads()
     }
 
+    // binding event handler in
+    // constructor
+    // best way to bind because
+    // 1. clean render method
+    // 2. best performance
+    // 3. does not autobind
+    // Disadvantage:
+    // more code to write
+    constructor(props) {
+        super(props)
+        this.deleteLead = this.deleteLead.bind(this)
+    }
+
+    // onClick={() =>   this.deleteLeadS(lead.id)}
+    // deleteLeadS = id => {
+    //     console.log(id)
+    // }
+
+    deleteLead(leadID) {
+        //console.log(id)
+        this.props.deleteLeads(leadID)
+    }
+
     render() {
         return (
             <div>
@@ -34,11 +57,7 @@ export class Leads extends Component {
                                 <td>{lead.message}</td>
                                 <td>
                                     <button
-                                    {/* binding is necessary to make `this` work */}
-                                        onClick={this.props.deleteLeads.bind(
-                                            this,
-                                            lead.id
-                                        )}
+                                        onClick={() => this.deleteLead(lead.id)}
                                         className="btn btn-danger btn-sm"
                                     >
                                         Delete
