@@ -4,6 +4,7 @@ const initialState = {
     leads: [],
 }
 
+// action is passed from lead.js in actions
 export default function(state = initialState, action) {
     switch (action.type) {
         case GET_LEADS:

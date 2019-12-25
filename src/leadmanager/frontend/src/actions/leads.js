@@ -5,15 +5,24 @@ import { GET_LEADS, DELETE_LEAD, ADD_LEAD } from './types'
 
 // GET LEADS
 // dispatch an action to our reducer
+//making this async call is possible because
+// of thunk
+
+// getLeads returns a function
+// Part 3 of thunk sequence
 export const getLeads = () => dispatch => {
+    // request to api made
+    // Part 2 of thunk sequence
     axios
         .get('/api/leads/')
         .then(res => {
+            // Redux Thunk call function with
+            // dispatch
             dispatch({
                 type: GET_LEADS,
                 payload: res.data,
             })
-        })
+        }) // once resolved, dispatch is called with action
         .catch(err => console.log(err))
 }
 

@@ -13,6 +13,8 @@ export class Leads extends Component {
     }
 
     componentDidMount() {
+        // action creator
+        // Part 1 of thunk sequence
         this.props.getLeads()
     }
 
