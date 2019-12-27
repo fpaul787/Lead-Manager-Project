@@ -26,3 +26,20 @@ class RegisterSerializer(serializers.ModelSerializer):
                                         validated_data['password'])
 
         return user
+
+# Login Serializer
+# We're not creating a model, so we are not using models.Serializer
+
+
+class LoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField()
+
+    # Djano Doc
+    # Knox Doc
+    # Rest Doc
+    def validate(self, data):
+        user = authenticate(**data)
+        if user and user.is_active:
+            return user
+        raise serializers.ValidationError("Incorrect Credentials")
