@@ -3,6 +3,7 @@ import axios from 'axios'
 
 import { createMessage, returnErrors } from './messages'
 import { GET_LEADS, DELETE_LEAD, ADD_LEAD, GET_ERRORS } from './types'
+import { tokenConfig } from './auth'
 
 // GET LEADS
 // dispatch an action to our reducer
@@ -11,11 +12,11 @@ import { GET_LEADS, DELETE_LEAD, ADD_LEAD, GET_ERRORS } from './types'
 
 // getLeads returns a function
 // Part 3 of thunk sequence
-export const getLeads = () => dispatch => {
+export const getLeads = () => (dispatch, getState) => {
     // request to api made
     // Part 2 of thunk sequence
     axios
-        .get('/api/leads/')
+        .get('/api/leads/', tokenConfig(getState))
         .then(res => {
             // Redux Thunk call function with
             // dispatch
@@ -30,9 +31,9 @@ export const getLeads = () => dispatch => {
 }
 
 // Delete lead
-export const deleteLeads = id => dispatch => {
+export const deleteLeads = id => (dispatch, getState) => {
     axios
-        .delete(`/api/leads/${id}/`)
+        .delete(`/api/leads/${id}/`, tokenConfig(getState))
         .then(res => {
             dispatch(createMessage({ deleteLead: 'Lead Deleted' }))
             dispatch({
@@ -44,9 +45,9 @@ export const deleteLeads = id => dispatch => {
 }
 
 // ADD LEAD
-export const addLead = lead => dispatch => {
+export const addLead = lead => (dispatch, getState) => {
     axios
-        .post('/api/leads/', lead)
+        .post('/api/leads/', lead, tokenConfig(getState))
         .then(res => {
             dispatch(createMessage({ addLead: 'Lead Added' }))
             dispatch({

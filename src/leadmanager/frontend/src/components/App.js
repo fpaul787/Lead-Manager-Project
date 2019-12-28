@@ -21,7 +21,14 @@ const alertOptions = {
 // to rest of my app
 import { Provider } from 'react-redux'
 import store from '../store'
+import { loadUser } from '../actions/auth'
 class App extends Component {
+    // fires off when our
+    // app loads
+    componentDidMount() {
+        store.dispatch(loadUser())
+    }
+
     render() {
         return (
             <Provider store={store}>
